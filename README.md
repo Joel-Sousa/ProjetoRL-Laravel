@@ -1,7 +1,7 @@
 
 ## Rodar os comandos
 
-* **Innstala as dependencias do laravel**
+* **Instala as dependencias do laravel**
 
     composer install
 
