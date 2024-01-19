@@ -2,6 +2,7 @@
 
 namespace App\Http\Repository;
 
+use App\Http\Validations\UsuarioValidations;
 use App\Models\User;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
@@ -9,14 +10,15 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuarioRepository
 {
-    public $guardName = 'web';
-
-    protected $status = 0;
-
     public function createUsuario(Request $request)
     {
+        $error = UsuarioValidations::createRequest($request);
+
+        if($error->erro)
+            return response(compact('error'));
 
         $user = new User();
+        $user->idRole = 2;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
@@ -45,6 +47,11 @@ class UsuarioRepository
 
     public function updateUsuario(Request $request)
     {
+        $error = UsuarioValidations::updateRequest($request);
+
+        if($error->erro)
+            return response(compact('error'));
+
         $user = User::where('id', $request->id)->first();
         $user->email = $request->email;
         if ($request->password != null)
