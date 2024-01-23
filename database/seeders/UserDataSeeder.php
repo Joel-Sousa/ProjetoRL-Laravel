@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Usuario;
+use App\Models\UserData;
 use Illuminate\Database\Seeder;
 
-class UsuarioSeeder extends Seeder
+class UserDataSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,14 +15,14 @@ class UsuarioSeeder extends Seeder
     public function run()
     {
         $data = [
-            (object) ['nome' => 'Admin'],
-            (object)['nome' => 'Usuario'],
+            (object) ['name' => 'Admin'],
+            (object)['name' => 'Usuario'],
          ];
  
  
          foreach($data as $i => $e){
-             Usuario::create([
-                 'nome' => $e->nome,
+             UserData::create([
+                 'name' => $e->name,
                  'idUser' => ($i+1)
              ]);
          }

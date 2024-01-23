@@ -22,4 +22,5 @@ class UserController extends Controller
     public function permission(){
         return $this->userService->permission();
     }
+
 }

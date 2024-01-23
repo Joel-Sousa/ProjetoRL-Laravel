@@ -4,8 +4,10 @@ namespace App\Http\Repository;
 
 use App\Http\Validations\UserValidations;
 use App\Models\User;
+use App\Models\UserData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 use Laravel\Passport\Passport;
 
@@ -15,7 +17,7 @@ class UserRepository
     
     public function login(Request $request)
     {
-        $error = UserValidations::createRequest($request);
+        $error = UserValidations::login($request);
 
         if($error->erro)
             return response(compact('error'));
@@ -29,7 +31,7 @@ class UserRepository
             $authUser = Auth::user();
             $token = $authUser->createToken('MyApp')->accessToken;
 
-            $user = User::with('usuario')->where('id', $authUser->id)->first();
+            $user = User::with('userData')->where('id', $authUser->id)->first();
 
             return response()->json(compact('token', 'user'));
         } else {
@@ -52,17 +54,18 @@ class UserRepository
     public function permission(){
         if (Auth::check()){
             $user = Auth::user();
-            $usuario = User::with('usuario')->where('id', $user->id)->first();
+            $userData = User::with('userData')->where('id', $user->id)->first();
             // $data = $usuario->all();
 
             $user = (object)[
-                'idRole' => $usuario->role->idRole,
-                'role' => $usuario->role->nome,
-                'email' => $usuario->email,
-                'nome' => $usuario->usuario->nome
+                'idRole' => $userData->role->idRole,
+                // 'role' => $userData->role->name,
+                // 'email' => $userData->email,
+                // 'name' => $userData->usuario->name
             ];
         }
 
         return response(compact('user'));
     }
+
 }

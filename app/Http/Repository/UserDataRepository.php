@@ -2,17 +2,17 @@
 
 namespace App\Http\Repository;
 
-use App\Http\Validations\UsuarioValidations;
+use App\Http\Validations\UserDataValidations;
 use App\Models\User;
-use App\Models\Usuario;
+use App\Models\UserData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UsuarioRepository
+class UserDataRepository
 {
-    public function createUsuario(Request $request)
+    public function createUserData(Request $request)
     {
-        $error = UsuarioValidations::createRequest($request);
+        $error = UserDataValidations::createUserData($request);
 
         if($error->erro)
             return response(compact('error'));
@@ -23,31 +23,31 @@ class UsuarioRepository
         $user->password = Hash::make($request->password);
         $user->save();
 
-        $cliente = new Usuario();
-        $cliente->nome = $request->nome;
+        $cliente = new UserData();
+        $cliente->name = $request->name;
         $cliente->idUser = $user->id;
         $cliente->save();
 
         return response()->json(['response' => true], 201);
     }
 
-    public function listUsuario()
+    public function listUserData()
     {
-        $usuario = Usuario::with('user')->get();
+        $userData = UserData::with('user')->get();
 
-        return response(compact('usuario'));
+        return response(compact('userData'));
     }
 
 
-    public function getUsuarioById(Request $request)
+    public function getUserDataById(Request $request)
     {
-        $usuario = Usuario::with('user')->where('idUser', $request->id)->first();
-        return response(compact('usuario'));
+        $userData = UserData::with('user')->where('idUser', $request->id)->first();
+        return response(compact('userData'));
     }
 
-    public function updateUsuario(Request $request)
+    public function updateUserData(Request $request)
     {
-        $error = UsuarioValidations::updateRequest($request);
+        $error = UserDataValidations::updateUserData($request);
 
         if($error->erro)
             return response(compact('error'));
@@ -58,18 +58,18 @@ class UsuarioRepository
             $user->password = Hash::make($request->password);
         $user->save();
 
-        $usuario = Usuario::where('idUser', $request->id)->first();
-        $usuario->nome = $request->nome;
-        $usuario->save();
+        $userData = UserData::where('idUser', $request->id)->first();
+        $userData->name = $request->name;
+        $userData->save();
 
         return response()->json(['response' => true], 201);
     }
 
-    public function deleteUsuarioById(Request $request)
+    public function deleteUserDataById(Request $request)
     {
         
-        $usuario = Usuario::where('idUser', $request->id);
-        $usuario->delete();
+        $userData = UserData::where('idUser', $request->id);
+        $userData->delete();
         
         $user = User::where('id', $request->id);
         $user->delete();

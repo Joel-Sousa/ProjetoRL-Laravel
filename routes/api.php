@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UserDataController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,16 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [UserController::class, 'login']);
 // Route::post('logout', [UserController::class, 'logout']);
 
-Route::post('createUsuario', [UsuarioController::class, 'createUsuario']);
+Route::post('createUserData', [UserDataController::class, 'createUserData']);
 
 Route::middleware('auth:api')->group(function(){
-    Route::get('permission', [UsuarioController::class, 'permission']);
-    
-    Route::get('listUsuario', [UsuarioController::class, 'listUsuario']);
-    Route::get('getUsuarioById', [UsuarioController::class, 'getUsuarioById']);
-    Route::put('updateUsuario', [UsuarioController::class, 'updateUsuario']);
-    Route::delete('deleteUsuarioById', [UsuarioController::class, 'deleteUsuarioById']);
-
     Route::get('permission', [UserController::class, 'permission']);
+    
+    Route::get('listUserData', [UserDataController::class, 'listUserData']);
+    Route::get('getUserDataById', [UserDataController::class, 'getUserDataById']);
+    Route::put('updateUserData', [UserDataController::class, 'updateUserData']);
+    Route::delete('deleteUserDataById', [UserDataController::class, 'deleteUserDataById']);
+
     Route::post('logout', [UserController::class, 'logout']);
 });

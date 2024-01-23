@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserValidations{
 
-    public static function createRequest(Request $request){
+    public static function login(Request $request){
 
         $validation = Validator::make(
             $request->all(),

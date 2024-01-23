@@ -16,8 +16,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         $data = [
-            (object) ['email' => 'admin@email.com', 'password' => Hash::make('123123123')],
-            (object) ['email' => 'usuario@email.com', 'password' => Hash::make('123123123')],
+            (object) ['email' => 'admin@email.com', 'password' => Hash::make('123')],
+            (object) ['email' => 'usuario@email.com', 'password' => Hash::make('123')],
         ];
 
         foreach($data as $i => $e){

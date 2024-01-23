@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
  class UserService
 {
-    private $model;
 
     public function __construct(UserRepository $userRepository)
     {
@@ -25,4 +24,5 @@ use Illuminate\Http\Request;
     public function permission(){
         return $this->userRepository->permission();
     }
+
 }

@@ -65,9 +65,9 @@ class User extends Authenticatable
     //     return [];
     // }
 
-    public function usuario()
+    public function userData()
     {
-        return $this->hasOne(Usuario::class, 'idUser');
+        return $this->hasOne(UserData::class, 'idUser');
     }
 
     public function role(){
