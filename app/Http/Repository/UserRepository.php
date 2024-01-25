@@ -54,18 +54,11 @@ class UserRepository
     public function permission(){
         if (Auth::check()){
             $user = Auth::user();
-            $userData = User::with('userData')->where('id', $user->id)->first();
-            // $data = $usuario->all();
+            $idRole = $user->idRole;
 
-            $user = (object)[
-                'idRole' => $userData->role->idRole,
-                // 'role' => $userData->role->name,
-                // 'email' => $userData->email,
-                // 'name' => $userData->usuario->name
-            ];
+            return response(compact('idRole'));
         }
 
-        return response(compact('user'));
     }
 
 }
