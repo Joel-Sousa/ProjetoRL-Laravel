@@ -54,9 +54,9 @@ class UserRepository
     public function permission(){
         if (Auth::check()){
             $user = Auth::user();
-            $idRole = $user->idRole;
+            $roles_id = $user->roles_id;
 
-            return response(compact('idRole'));
+            return response(compact('roles_id'));
         }
 
     }

@@ -30,3 +30,22 @@
 * **Roda o projeto**
 
     php artisan serve
+
+
+# Padrao de nomeclaturas
+#### Nome das pastas 
+- camelCase Ex: (**nomeDaPasta**)
+
+#### Nome dos arquivos 
+- PascalCase Ex: (**NomeDoArquivo**)
+
+#### Variaveis 
+- camelCase Ex: (**nomeDaVariavel**)
+
+#### Nome das Classes 
+- PascalCase EX: (**NomeDaClasse**)
+
+#### Nome das tabelas e colunas
+- snake_case no plural EX: (**nome_da_tabelas**)
+- snake_case EX: (**nome_da_coluna**)
+- snake_case para a fk adicionar o sufixo 'id' EX: (**nome_da_coluna_'id'**)

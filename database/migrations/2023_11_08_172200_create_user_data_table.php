@@ -13,9 +13,9 @@ class CreateUserDataTable extends Migration
      */
     public function up()
     {
-        Schema::create('userData', function (Blueprint $table) {
-            $table->id('idUserData');            
-            $table->foreignId('idUser')->references('id')->on('users')->after('idUserData');
+        Schema::create('usersData', function (Blueprint $table) {
+            $table->id();            
+            $table->foreignId('users_id')->references('id')->on('users')->after('id');
             $table->string('name');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateUserDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userData');
+        Schema::dropIfExists('usersData');
     }
 }

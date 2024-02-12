@@ -18,15 +18,15 @@ class UserDataRepository
             return response(compact('error'));
 
         $user = new User();
-        $user->idRole = 2;
+        $user->roles_id = 2;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
 
-        $cliente = new UserData();
-        $cliente->name = $request->name;
-        $cliente->idUser = $user->id;
-        $cliente->save();
+        $userData = new UserData();
+        $userData->name = $request->name;
+        $userData->users_id = $user->id;
+        $userData->save();
 
         return response()->json(['response' => true], 201);
     }
@@ -41,7 +41,7 @@ class UserDataRepository
 
     public function getUserDataById(Request $request)
     {
-        $userData = UserData::with('user')->where('idUser', $request->id)->first();
+        $userData = UserData::with('user')->where('users_id', $request->id)->first();
         return response(compact('userData'));
     }
 
@@ -58,7 +58,7 @@ class UserDataRepository
             $user->password = Hash::make($request->password);
         $user->save();
 
-        $userData = UserData::where('idUser', $request->id)->first();
+        $userData = UserData::where('users_id', $request->id)->first();
         $userData->name = $request->name;
         $userData->save();
 
@@ -68,7 +68,7 @@ class UserDataRepository
     public function deleteUserDataById(Request $request)
     {
         
-        $userData = UserData::where('idUser', $request->id);
+        $userData = UserData::where('users_id', $request->id);
         $userData->delete();
         
         $user = User::where('id', $request->id);

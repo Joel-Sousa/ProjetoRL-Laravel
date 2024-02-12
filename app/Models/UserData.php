@@ -9,13 +9,10 @@ class UserData extends Model
 {
     use HasFactory;
 
-    // protected $primaryKey = 'id';
-    protected $table = 'userData';
-    protected $primaryKey = 'idUserData';
-
+    protected $table = 'usersData';
     protected $fillable = [
+        'users_id',
         'name',
-        'idUser'
     ];
 
     protected $hidden = [
@@ -25,7 +22,7 @@ class UserData extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'idUser');
+        return $this->belongsTo(User::class, 'users_id');
     }
     
 }

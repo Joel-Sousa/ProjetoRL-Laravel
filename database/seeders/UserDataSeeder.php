@@ -23,7 +23,7 @@ class UserDataSeeder extends Seeder
          foreach($data as $i => $e){
              UserData::create([
                  'name' => $e->name,
-                 'idUser' => ($i+1)
+                 'users_id' => ($i+1)
              ]);
          }
     }

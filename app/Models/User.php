@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'idRole',
+        'role_id',
     ];
 
     /**
@@ -67,10 +67,10 @@ class User extends Authenticatable
 
     public function userData()
     {
-        return $this->hasOne(UserData::class, 'idUser');
+        return $this->hasOne(UserData::class, 'users_id');
     }
 
     public function role(){
-        return $this->belongsTo(Role::class, 'idRole');
+        return $this->belongsTo(Role::class, 'roles_id');
     }
 }

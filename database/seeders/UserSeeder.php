@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             User::create([
                 'email' => $e->email,
                 'password' => $e->password,
-                'idRole' => ($i+1)
+                'roles_id' => ($i+1)
             ]);
         }
     }
