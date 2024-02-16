@@ -7,19 +7,23 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function __construct(UserService $userService){
+    public function __construct(UserService $userService)
+    {
         $this->userService = $userService;
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         return $this->userService->login($request);
     }
-    
-    public function logout(){
+
+    public function logout()
+    {
         return $this->userService->logout();
     }
-    
-    public function permission(){
+
+    public function permission()
+    {
         return $this->userService->permission();
     }
 

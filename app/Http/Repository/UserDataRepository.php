@@ -3,10 +3,13 @@
 namespace App\Http\Repository;
 
 use App\Http\Validations\UserDataValidations;
+use App\Mail\CreateUserMail;
+use App\Mail\DeleteUserMail;
 use App\Models\User;
 use App\Models\UserData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserDataRepository
 {
@@ -27,6 +30,12 @@ class UserDataRepository
         $userData->name = $request->name;
         $userData->users_id = $user->id;
         $userData->save();
+        
+        $data = (object) [
+            'name' => $request->name,
+        ];
+
+        Mail::to($request->email)->send(new CreateUserMail($data));
 
         return response()->json(['response' => true], 201);
     }
@@ -68,11 +77,17 @@ class UserDataRepository
     public function deleteUserDataById(Request $request)
     {
         
-        $userData = UserData::where('users_id', $request->id);
+        $userData = UserData::where('users_id', $request->id)->first();
         $userData->delete();
         
-        $user = User::where('id', $request->id);
+        $user = User::find($request->id);
         $user->delete();
+
+        $data = (object)[
+            'name' => $userData->name,
+        ];
+
+        Mail::to($user->email)->send(new DeleteUserMail($data));
 
         return response()->json(['response' => true], 200);
     }

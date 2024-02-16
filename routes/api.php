@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDataController;
+use App\Mail\CreateUserMail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,12 @@ Route::middleware('auth:api')->group(function(){
     Route::get('getUserDataById', [UserDataController::class, 'getUserDataById']);
     Route::put('updateUserData', [UserDataController::class, 'updateUserData']);
     Route::delete('deleteUserDataById', [UserDataController::class, 'deleteUserDataById']);
-
+    
     Route::post('logout', [UserController::class, 'logout']);
 });
+
+// Route::get('tst', [UserController::class, 'tst']);
+
+// Route::get('tst1', function(){
+//     return view('mail.deleteUser');
+// });
