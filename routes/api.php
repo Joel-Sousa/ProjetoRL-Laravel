@@ -28,12 +28,12 @@ Route::middleware('auth:api')->group(function(){
     Route::get('getUserDataById', [UserDataController::class, 'getUserDataById']);
     Route::put('updateUserData', [UserDataController::class, 'updateUserData']);
     Route::delete('deleteUserDataById', [UserDataController::class, 'deleteUserDataById']);
+
+    Route::get('usersPrint', [UserDataController::class, 'usersPrint']);
     
     Route::post('logout', [UserController::class, 'logout']);
 });
 
 // Route::get('tst', [UserController::class, 'tst']);
 
-// Route::get('tst1', function(){
-//     return view('mail.deleteUser');
-// });
+// Route::get('tst1', function(){ return view('pdf.usersPrint'); });

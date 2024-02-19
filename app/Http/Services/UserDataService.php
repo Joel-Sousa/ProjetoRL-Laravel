@@ -35,5 +35,9 @@ use Illuminate\Http\Request;
     {
         return $this->userDataRepository->deleteUserDataById($request);
     }
-
+    
+    public function usersPrint()
+    {
+        return $this->userDataRepository->usersPrint();
+    }
 }

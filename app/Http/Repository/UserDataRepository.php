@@ -7,9 +7,11 @@ use App\Mail\CreateUserMail;
 use App\Mail\DeleteUserMail;
 use App\Models\User;
 use App\Models\UserData;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class UserDataRepository
 {
@@ -17,7 +19,7 @@ class UserDataRepository
     {
         $error = UserDataValidations::createUserData($request);
 
-        if($error->erro)
+        if ($error->erro)
             return response(compact('error'));
 
         $user = new User();
@@ -30,7 +32,7 @@ class UserDataRepository
         $userData->name = $request->name;
         $userData->users_id = $user->id;
         $userData->save();
-        
+
         $data = (object) [
             'name' => $request->name,
         ];
@@ -58,7 +60,7 @@ class UserDataRepository
     {
         $error = UserDataValidations::updateUserData($request);
 
-        if($error->erro)
+        if ($error->erro)
             return response(compact('error'));
 
         $user = User::where('id', $request->id)->first();
@@ -76,10 +78,10 @@ class UserDataRepository
 
     public function deleteUserDataById(Request $request)
     {
-        
+
         $userData = UserData::where('users_id', $request->id)->first();
         $userData->delete();
-        
+
         $user = User::find($request->id);
         $user->delete();
 
@@ -90,5 +92,26 @@ class UserDataRepository
         Mail::to($user->email)->send(new DeleteUserMail($data));
 
         return response()->json(['response' => true], 200);
+    }
+
+    public function usersPrint()
+    {
+        foreach (Storage::files('public/pdf/') as $e)
+            Storage::delete($e);
+
+        $userData = UserData::with('user')->get();
+
+        $file = 'Usuarios.pdf';
+        $path = storage_path('app/public/pdf/' . $file);
+
+        $pdf = Pdf::loadView('pdf.usersPrint', compact('userData'));
+        // $pdf->setPaper('a4', 'landscape');
+        // return $pdf->stream();
+        // return $pdf->download('ListaDeUsuarios.pdf');
+        $pdf->save($path);
+
+        return 'pdf/' . $file;
+
+
     }
 }

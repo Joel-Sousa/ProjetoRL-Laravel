@@ -35,4 +35,8 @@ class UserDataController extends Controller
     {
         return $this->userDataService->deleteUserDataById($request);
     }
+    
+    public function usersPrint(){
+        return $this->userDataService->usersPrint();
+    }
 }
