@@ -35,9 +35,11 @@ class UserDataRepository
 
         $data = (object) [
             'name' => $request->name,
+            'email' => $request->email,
         ];
 
-        Mail::to($request->email)->send(new CreateUserMail($data));
+        // Mail::send(new CreateUserMail($data));
+        Mail::queue(new CreateUserMail($data));
 
         return response()->json(['response' => true], 201);
     }
@@ -65,6 +67,7 @@ class UserDataRepository
 
         $user = User::where('id', $request->id)->first();
         $user->email = $request->email;
+        
         if ($request->password != null)
             $user->password = Hash::make($request->password);
         $user->save();
@@ -87,9 +90,11 @@ class UserDataRepository
 
         $data = (object)[
             'name' => $userData->name,
+            'email' => $user->email,
         ];
 
-        Mail::to($user->email)->send(new DeleteUserMail($data));
+        // Mail::send(new DeleteUserMail($data));
+        Mail::queue(new DeleteUserMail($data));
 
         return response()->json(['response' => true], 200);
     }

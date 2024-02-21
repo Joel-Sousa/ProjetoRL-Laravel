@@ -23,13 +23,21 @@
 
     php artisan passport:install
 
-* **Rodar o comando e colocar 'client secret' na chave**
+* **Rodar o comando abaixo e colocar o valor do 'client secret' na entrada do comando**
 
     php artisan passport:client --personal
+
+* **Cria o Storage link simbolico**
+
+    php artisan storage:link
 
 * **Roda o projeto**
 
     php artisan serve
+
+* **Roda as filas**
+
+    php artisan queue:work
 
 
 # Padrao de nomeclaturas

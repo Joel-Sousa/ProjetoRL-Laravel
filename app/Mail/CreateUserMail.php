@@ -12,6 +12,8 @@ class CreateUserMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $data;
+
     /**
      * Create a new message instance.
      *
@@ -34,10 +36,10 @@ class CreateUserMail extends Mailable
 
         try {
             return $this->view('mail.createUser')
-                        ->from(env('MAIL_FROM_ADDRESS'), 'ProjetoRL')
-                        ->subject('Bem vindo!')
-                        ->with(['data' => $this->data]);
-
+                ->to($this->data->email, $this->data->name)
+                ->from(env('MAIL_FROM_ADDRESS'), 'ProjetoRL')
+                ->subject('Bem vindo!')
+                ->with(['data' => $this->data]);
         } catch (Exception $e) {
             throw new Exception('Error', $e->getMessage());
         }

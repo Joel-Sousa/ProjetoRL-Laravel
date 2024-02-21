@@ -34,6 +34,6 @@ Route::middleware('auth:api')->group(function(){
     Route::post('logout', [UserController::class, 'logout']);
 });
 
-// Route::get('tst', [UserController::class, 'tst']);
+// Route::get('tst', [UserController::class, 'usersPrint']);
 
-// Route::get('tst1', function(){ return view('pdf.usersPrint'); });
+// Route::get('tst1', function(){ return view('mail.createUser'); });
