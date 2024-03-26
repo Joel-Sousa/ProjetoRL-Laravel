@@ -67,6 +67,7 @@ class UserDataRepository
 
         $user = User::where('id', $request->id)->first();
         $user->email = $request->email;
+        $user->roles_id = $request->roles_id;
         
         if ($request->password != null)
             $user->password = Hash::make($request->password);
