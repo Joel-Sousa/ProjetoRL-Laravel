@@ -5,6 +5,10 @@
 
     composer install
 
+* **Instala o passport**
+
+    composer require laravel/passport
+
 * **Retirar a extensao '.example' do arquivo '.env.example' dentro do projeto**
 
 * **Tem que criar a base de dados no banco de dados e apontar ela no '.env'**

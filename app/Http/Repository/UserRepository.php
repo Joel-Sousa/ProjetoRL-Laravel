@@ -45,8 +45,9 @@ class UserRepository
     public function logout()
     {
         // Auth::user();
-        if (Auth::check())
+        if (Auth::check()){
             Auth::guard('api')->user()->token()->revoke();
+        }
 
             return response()->json(['response' => true, 'message' => 'Successfully logged out'], 200);
     }

@@ -14,7 +14,11 @@ class UserRole extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table){
-            $table->foreignId('roles_id')->after('id')->references('id')->on('roles');
+            // $table->foreignId('roles_id')->nullable()->after('id')->references('id')->on('roles');
+            $table->foreignId('roles_id')->nullable()->after('id')->references('id')->on('roles');
+            // $table->integer('roles_id')->after('id')->nullable();
+            // $table->foreign('roles_id')->references('id')->on('roles');
+
         });
     }
 

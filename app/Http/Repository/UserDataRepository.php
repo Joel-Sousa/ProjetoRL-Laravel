@@ -116,7 +116,5 @@ class UserDataRepository
         $pdf->save($path);
 
         return 'pdf/' . $file;
-
-
     }
 }
