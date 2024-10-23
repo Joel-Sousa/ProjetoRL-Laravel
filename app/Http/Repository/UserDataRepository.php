@@ -102,8 +102,10 @@ class UserDataRepository
 
     public function usersPrint()
     {
-        foreach (Storage::files('public/pdf/') as $e)
-            Storage::delete($e);
+        
+        // foreach (Storage::files('public/pdf/') as $e){
+        //     Storage::delete($e);
+        // }
 
         $userData = UserData::with('user')->get();
 

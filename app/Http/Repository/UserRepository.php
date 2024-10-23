@@ -24,11 +24,11 @@ class UserRepository
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $token_time = now()->addHours(8);
-            
             Passport::personalAccessTokensExpireIn($token_time);
             
             /** @var \App\Models\User $authUser **/
             $authUser = Auth::user();
+
             $token = $authUser->createToken('MyApp')->accessToken;
 
             $user = User::with('userData')->where('id', $authUser->id)->first();

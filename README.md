@@ -43,6 +43,10 @@
 
     php artisan queue:work
 
+* **Comando unico para subir o projeto**
+    php artisan migrate:fresh --seed && CLIENT_SECRET=$(php artisan passport:install | grep 'Client secret' | head -n1 | cut -d' ' -f3) && php artisan passport:client --personal --name=$CLIENT_SECRET && php artisan serve
+
+* **Obs verificar se ha necessidade de dar permissao para a pasta 'public/storage' e 'storage'**
 
 # Padrao de nomeclaturas
 #### Nome das pastas 
