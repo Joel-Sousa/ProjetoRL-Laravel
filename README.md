@@ -65,3 +65,5 @@
 - snake_case no plural EX: (**nome_da_tabelas**)
 - snake_case EX: (**nome_da_coluna**)
 - snake_case para a fk adicionar o sufixo 'id' EX: (**nome_da_coluna_'id'**)
+
+Versao do php: 7.4
